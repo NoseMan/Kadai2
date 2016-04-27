@@ -38,6 +38,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+
 /**
  * Main window of the Anagram Game application.
  */
@@ -84,7 +85,7 @@ public class Anagrams extends JFrame {
         
         initComponents();
         getRootPane().setDefaultButton(guessButton);
-        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
+        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx,"a"));
         pack();
         guessedWord.requestFocusInWindow();
         // Center in the screen
@@ -255,9 +256,9 @@ public class Anagrams extends JFrame {
 
     private void nextTrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTrialActionPerformed
         wordIdx = (wordIdx + 1) % wordLibrary.getSize();
-
+        String level = (String)selectLevel.getSelectedItem();//here
         feedbackLabel.setText(" ");
-        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
+        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx,level));
         guessedWord.setText("");
         getRootPane().setDefaultButton(guessButton);
 
@@ -269,7 +270,7 @@ public class Anagrams extends JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void guessedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessedWordActionPerformed
-        if (wordLibrary.isCorrect(wordIdx, guessedWord.getText())){
+    	if (wordLibrary.isCorrect(wordIdx, guessedWord.getText())){
             feedbackLabel.setText("せいかーい!次の単語挑戦しよー！");
             getRootPane().setDefaultButton(nextTrial);
         } else {
@@ -299,7 +300,7 @@ public class Anagrams extends JFrame {
     private javax.swing.JButton nextTrial;
     private javax.swing.JLabel scrambledLabel;
     private javax.swing.JTextField scrambledWord;
-    private javax.swing.JComboBox selectLevel;
+    public javax.swing.JComboBox selectLevel;
     // End of variables declaration//GEN-END:variables
 
 }
